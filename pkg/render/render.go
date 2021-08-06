@@ -7,9 +7,17 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/shaheen-uddin/go-practice/pkg/config"
 )
 
 var functions = template.FuncMap{}
+
+var app *config.AppConfig
+
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
