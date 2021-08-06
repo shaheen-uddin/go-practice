@@ -7,26 +7,25 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-
-	"github.com/shaheen-uddin/go-practice/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
-var app *config.AppConfig
+/* var app *config.AppConfig
 
 func NewTemplates(a *config.AppConfig) {
 	app = a
-}
+} */
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	tc, err := CreateTemplateCache()
+	fmt.Println(tc)
+
 	if err != nil {
 		log.Fatal(err)
 	}
 	t, ok := tc[tmpl]
-
 	if !ok {
 		log.Fatal(err)
 	}
@@ -37,20 +36,16 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	_, err = buf.WriteTo(w)
 	if err != nil {
-		fmt.Println("Error writing template to browser", err)
+		fmt.Println("Error writing to template to browser", err)
 	}
 
-	/* parseTemplate, _ := template.ParseFiles("../../templates/" + tmpl)
-	if err := parseTemplate.Execute(w, nil); err != nil {
-		fmt.Println("error parsing template", err)
-		return
-	} */
 }
 
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
 	pages, err := filepath.Glob("../../templates/*.page.html")
+	fmt.Println(pages)
 	if err != nil {
 		return myCache, err
 	}
