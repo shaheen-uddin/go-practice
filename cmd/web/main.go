@@ -6,7 +6,7 @@ import (
 	"github.com/shaheen-uddin/go-practice/pkg/handlers"
 )
 
-const portNumber = ".8080"
+const portNumber = ":8080"
 
 func main() {
 	http.HandleFunc("/", handlers.Home)
